@@ -1,6 +1,8 @@
 package ru.geekbrains.lesson3.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,16 +17,23 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(name = "price")
+    private Double price;
 
-    public Product() {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "products_persons",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
+    private List<Person> persons = new ArrayList<>();
+
+    public Product(String two_book) {
     }
 
-    public Product(String title, Category category) {
+    public Product(String title, Double price) {
         this.title = title;
-        this.category = category;
+        this.price = price;
     }
 
     public Long getId() {
@@ -43,34 +52,25 @@ public class Product {
         this.title = title;
     }
 
-    public Category getCategory() {
-        return category;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id.equals(product.id) &&
-                Objects.equals(title, product.title);
+    public List<Person> getPersons() {
+        return persons;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title);
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
+        return String.format("Product [id = %d, title = %s, price = %p]", id, title, price);
     }
 }
 

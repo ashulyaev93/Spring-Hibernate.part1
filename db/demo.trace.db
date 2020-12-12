@@ -900,8 +900,8 @@ org.h2.jdbc.JdbcSQLException: Cannot truncate "PUBLIC.READERS"; SQL statement:
 	at org.hibernate.internal.SessionImpl.executeNativeUpdate(SessionImpl.java:1642)
 	at org.hibernate.query.internal.NativeQueryImpl.doExecuteUpdate(NativeQueryImpl.java:295)
 	at org.hibernate.query.internal.AbstractProducedQuery.executeUpdate(AbstractProducedQuery.java:1604)
-	at ru.geekbrains.lesson3.hibernate.many_to_many.ManyToManyApp.clear(ManyToManyApp.java:85)
-	at ru.geekbrains.lesson3.hibernate.many_to_many.ManyToManyApp.main(ManyToManyApp.java:24)
+	at ru.geekbrains.lesson3.hibernate.entity_manager.ManyToManyApp.clear(ManyToManyApp.java:85)
+	at ru.geekbrains.lesson3.hibernate.entity_manager.ManyToManyApp.main(ManyToManyApp.java:24)
 2020-11-19 14:03:35 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
