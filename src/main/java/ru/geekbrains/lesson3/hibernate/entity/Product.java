@@ -28,7 +28,7 @@ public class Product {
     )
     private List<Person> persons = new ArrayList<>();
 
-    public Product(String two_book) {
+    public Product() {
     }
 
     public Product(String title, Double price) {
@@ -70,7 +70,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("Product [id = %d, title = %s, price = %p]", id, title, price);
+        return String.format("Product [id = %d, title = %s, price = %f]", id, title, price);
     }
 }
 
