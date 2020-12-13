@@ -6,7 +6,7 @@
     <session-factory>
 
         <property name="connection.driver_class">org.h2.Driver</property>
-        <property name="connection.url">jdbc:h2:file:E:\H2;MV_STORE=false</property>
+        <property name="connection.url">jdbc:h2:file:C:\Users\Professional\Searches\Desktop\java\GeekBrains\Spring\teacher.lesson3-Spring\db\demo</property>
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
         <property name="connection.pool_size">8</property>
@@ -26,6 +26,6 @@
         <!--        <property name="show_sql">true</property>-->
         <!--        <property name="current_session_context_class">thread</property>-->
 
-        <mapping class="ru.geekbrains.lesson3.hibernate.entity.SimpleItem"/>
+        <mapping class="ru.geekbrains.lesson3.hibernate.entity_manager.ManyToManyApp"/>
     </session-factory>
 </hibernate-configuration>

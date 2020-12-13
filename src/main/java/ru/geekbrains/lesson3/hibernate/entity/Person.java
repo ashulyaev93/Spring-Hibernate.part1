@@ -1,6 +1,8 @@
 package ru.geekbrains.lesson3.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,20 +16,19 @@ public class Person {
     @Column
     private String firstname;
 
-    @Column
-    private String email;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "details_id")
-    private PersonDetails personDetails;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "products_persons",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products = new ArrayList<>();
 
     public Person() {
     }
 
-    public Person(String firstname, String email, PersonDetails personDetails) {
+    public Person(String firstname) {
         this.firstname = firstname;
-        this.email = email;
-        this.personDetails = personDetails;
     }
 
     public Long getId() {
@@ -38,53 +39,25 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstname = firstname;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public PersonDetails getPersonDetails() {
-        return personDetails;
-    }
-
-    public void setPersonDetails(PersonDetails personDetails) {
-        this.personDetails = personDetails;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return id.equals(person.id) &&
-                Objects.equals(firstname, person.firstname) &&
-                Objects.equals(email, person.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, email);
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", email='" + email + '\'' +
-                ", personDetails=" + personDetails +
-                '}';
+        return String.format("Person [id = %d, firstname = %s]", id, firstname);
     }
 }
 
